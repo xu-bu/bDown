@@ -43,6 +43,7 @@ def main():
     os.system(f'ffmpeg -i "video.mp4" -i "audio.mp3" -c copy "{video_name}.mp4"')
     os.remove("video.mp4")
     os.remove("audio.mp3")
-    shutil.move(f'{video_name}.mp4', f'C:\\Users\\xubu\\Desktop\\{video_name}.mp4')
+    desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+    shutil.move(f'{video_name}.mp4', desktop)
 
 main()
