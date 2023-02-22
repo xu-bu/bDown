@@ -37,8 +37,14 @@ def main():
     dic = json.loads(jsonData)
     video_link = dic['data']['dash']['video'][0]['baseUrl']
     audio_link = dic['data']['dash']['audio'][0]['baseUrl']
-    downLoad(video_link, "video.mp4")
+    # if no extra option, download video, otherwise just download audio
     downLoad(audio_link, "audio.mp3")
+    if (len(sys.argv) == 2):
+        downLoad(video_link, "video.mp4")
+    else:
+        desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+        shutil.move('audio.mp3', desktop)
+        return
 
     os.system(f'ffmpeg -i "video.mp4" -i "audio.mp3" -c copy "{video_name}.mp4"')
     os.remove("video.mp4")
